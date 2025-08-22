@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="SAIL-Recon: Large SfM by Augmenting Scene Regression with Localization">
+  <meta name="keywords" content="VGGT,SfM,SceneRegression,VisualLocalization,SLAM">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SAIL-Recon: Large SfM by Augmenting Scene Regression with Localization</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+  <!-- <link href="./static/css/math.css" rel="stylesheet"> -->
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon-16x16.png">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      <a class="navbar-item" href="https://keunhong.com">
+      <span class="icon">
+          <i class="fas fa-home"></i>
+      </span>
+      </a>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          More Research
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item" href="https://github.com/HKUST-SAIL/NoiseAR">
+            NoiseAR: AutoRegressing Initial Noise Prior for Diffusion Models
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">SAIL-Recon: Large SfM by Augmenting Scene Regression with Localization</h1>
+          <div class="column is-full_width">
+            <h2 class="title is-4">Arxiv</h2>
+          </div>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://github.com/JunyuanDeng">Junyuan Deng</a><sup>12*</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://hengli.me">Heng Li</a><sup>1*</sup>,</span>
+            <span class="author-block">
+              Tao Xie<sup>2</sup>,
+            <span class="author-block">
+              Weiqiang Ren<sup>2</sup>,
+            </span>
+            <span class="author-block">
+              Qian Zhang<sup>2</sup>,
+            </span>
+            <span class="author-block">
+              Ping Tan<sup>1<span>&#8224;</span></sup>,
+            </span>
+            <span class="author-block">
+              Xiaoyang Guo</a><sup>2<span>&#8224;</span></sup>,
+            </span>
+          </div>
+
+          <div class="is-size-6 publication-authors">
+            <span class="author-block"><sup>1</sup>Hong Kong University of Science and Technology,</span>
+            <span class="author-block"><sup>2</sup>Horizon, Inc</span>
+          </div>
+          <div class="is-size-6 publication-authors">
+            <span class="author-block"><sup>*</sup>Equal Contribution</span>
+            <span class="author-block"><sup><span>&#8224;</span></sup>Corresponding Author</span>
+          </div>
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="https://arxiv.com"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Arxiv</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://arxiv.com"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <!-- Video Link. -->
+              <!-- <span class="link-block">
+                <a href="https://github.com"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Code (Coming Soon)</span>
+                </a>
+              </span> -->
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/HKUST-SAIL/sail-recon"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                </a>
+              </span>
+              <!-- Dataset Link. -->
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <img class="img-fluid" src="static/figs/pipeline.png" alt="Framework" width="800">
+      <h2 class="subtitle has-text-centered">
+       <b>SAIL-Recon Pipeline</b> 
+      </h2>
+    </div>
+  </div>
+</section>
+<section class="section">
+  <div class="container is-max-desktop">
+ <!-- Abstract. -->
+ <div class="columns is-centered has-text-centered">
+  <div class="column is-four-fifths">
+    <h2 class="title is-3">Abstract</h2>
+    <div class="content has-text-justified">
+      <p>Scene regression methods, such as VGGT, solve the Structure-from-Motion (SfM) problem by directly regressing camera poses and 3D scene structures from input images. They demonstrate impressive performance in handling images under extreme viewpoint changes. However, these methods struggle to handle a large number of input images. To address this problem, we introduce \ours, a feed-forward Transformer for large scale SfM, by augmenting the scene regression network with visual localization capabilities. Specifically, our method first computes a neural scene representation from a subset of anchor images. The regression network is then fine-tuned to reconstruct all input images conditioned on this neural scene representation. Comprehensive experiments show that our method not only scales efficiently to large-scale scenes, but also achieves state-of-the-art results on both camera pose estimation and novel view synthesis benchmarks, including TUM-RGBD, CO3Dv2, and Tanks & Temples. 
+      </p>
+    </div>
+  </div>
+</div>
+
+
+
+
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <h2 class="title is-3 has-text-centered" >Reconstruction Demo</h2>
+    <div class="container">
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="item">
+          <video poster="" id="barn" autoplay controls muted loop playsinline style="width:100%;max-width:900px;">
+            <source src="static/vids/t2_barn.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="item">
+          <video poster="" id="meeting" autoplay controls muted loop playsinline style="width:100%;max-width:900px;">
+            <source src="static/vids/t2_meeting_compress.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="item">
+          <video poster="" id="tum360" autoplay controls muted loop playsinline style="width:100%;max-width:900px;">
+            <source src="static/vids/tum_360.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+      <script>
+        document.addEventListener('DOMContentLoaded', function () {
+          bulmaCarousel.attach('#results-carousel', {
+            slidesToScroll: 1,
+            slidesToShow: 1,
+            loop: true,
+            autoplay: false,
+            pauseOnHover: true,
+            navigation: true,
+            pagination: true
+          });
+        });
+      </script>
+    </div>
+  </div>
+</section>
+
+
+<!--/ Abstract. -->
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <h2 class="title is-3 has-text-centered">Reconstruction Visualization</h2>
+
+      <hr style="margin-top:0px">
+      <img class="img-fluid" src="static/figs/traj_ply.png" alt="Results" width="1200">   
+      <hr style="margin-top:0px">
+            <hr style="margin-top:0px">
+      <img class="img-fluid" src="static/figs/traj_ply2.png" alt="Results" width="1200">   
+      <hr style="margin-top:0px">
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <h2 class="title is-3 has-text-centered">Novel View Synthesis</h2>
+
+      <hr style="margin-top:0px">
+      <h5 class="title is-5 has-text-centered">Tanks and Temple - Tranining</h5>
+      <img class="img-fluid" src="static/figs/visualization_psnr-t2_training.png" alt="Results" width="1200">   
+      <hr style="margin-top:0px">
+      <h5 class="title is-5 has-text-centered">Tanks and Temple - Intermediate</h5>
+      <img class="img-fluid" src="static/figs/visualization_psnr_t2_intermididate.png" alt="Results" width="1200">  
+      <!-- <hr style="margin-top:0px"> -->
+      <hr style="margin-top:0px">
+      <h5 class="title is-5 has-text-centered">Tanks and Temple - Advanced</h5>
+      <img class="img-fluid" src="static/figs/visualization_psnr_t2_advanced.png" alt="Results" width="1200">  
+      <hr style="margin-top:0px">
+      <h5 class="title is-5 has-text-centered">Mip-NeRF 360</h5>
+      <img class="img-fluid" src="static/figs/visualization_psnr_360_cropped-1.png" alt="Results" width="1200">  
+            <!-- <hr style="margin-top:0px">
+      <h5 class="title is-5 has-text-centered">7-Scenes</h5>
+      <img class="img-fluid" src="static/figs/visualization_psnr_7scens.png" alt="Results" width="1200">   -->
+    </div>
+  </div>
+</section>
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@inproceedings{dengli2025sailrecon,
+  author    = {Deng, Junyuan and Li, Heng and Xie, Tao and Ren, Weiqiang and Tan, Ping and Xiaoyang, Guo},
+  title     = {SAIL-Recon: Large SfM by Augmenting Scene Regression with Localization},
+  booktitle={arxiv},
+  year      = {2025},
+}</code></pre>
+  </div>
+</section>
+</div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is licensed under a <a rel="license"
+                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+          <p>
+            This means you are free to borrow the <a
+              href="https://github.com/nerfies/nerfies.github.io">source code</a> of this website,
+            we just ask that you link back to this page in the footer.
+            Please remember to remove the analytics code included in the header of the website which
+            you do not want on your website.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
